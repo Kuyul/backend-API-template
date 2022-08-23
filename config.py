@@ -21,16 +21,7 @@ class BaseConfig(object):
         app.config.from_object(cls)
 
     # # LOGGER
-    # DEBUG = True
-    # TESTING = True
-    # APP_NAME = os.environ.get('APP_NAME', 'stuio-trend-subscriber')
-    # APP_NAME_EXPORT = os.environ.get('APP_NAME_EXPORT', 'studio-trend-export')
-    # LOGGING_FORMAT = "%(asctime)s - [%(levelname)s] - %(name)s - %(message)s"
-    # ACCESS_LOGGING_FORMAT = "%(asctime)s - %(name)s - %(message)s"
-    # LOGGING_DATE_FORMAT = "%Y-%m-%dT%H:%M:%S%z"  # iso8601
-    # LOGGING_PATH = '../logs'
-    # EXPORT_LOGGING_PATH = 'logs'
-    # LOGGING_LEVEL = logging.INFO
+    LOGGING_PATH = '../logs'
 
     # MYSQL
     MYSQL_HOST = os.environ.get('MYSQL_HOST', 'db host')
