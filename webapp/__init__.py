@@ -28,7 +28,7 @@ def create_app():
 
 
 def register_blueprints(app: Flask) -> None:
-    from chatapp.users import user_api
+    from webapp.users.routes import user_api
 
     apis = [user_api]
 
