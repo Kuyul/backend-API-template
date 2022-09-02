@@ -82,14 +82,3 @@ class UserLoginController(MethodView):
             "status": "success",
             "message": "successfully logged in"
         }
-
-
-class TestJWTController(MethodView):
-    @jwt_required()
-    def post(self):
-        current_user = get_jwt_identity()
-        return {
-            "data:": {},
-            "status": "success",
-            "message": f"logged in as {current_user}"
-        }
