@@ -18,3 +18,4 @@ class TemplateController(MethodView):
                 "status": "success",
                 "message": ""
         }
+
