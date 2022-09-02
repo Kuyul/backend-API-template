@@ -15,11 +15,13 @@ class UserDAO:
                 FROM user
                 WHERE USER_ID = %(user_id)s
                 """
+                
         with self.db.cursor(dictionary=True) as cursor:
             cursor.execute(query, {
                 "user_id": user_id
             })
             row = cursor.fetchone()
+            
             user = {
                 "user_id": row['USER_ID'],
                 "email": row['EMAIL'],
@@ -29,3 +31,38 @@ class UserDAO:
             }
 
             return user
+
+    def check_email(self, email: str):
+        query = """
+        SELECT id from user
+        WHERE email = %(email)s
+        """
+
+        with self.db.cursor(dictionary=True) as cursor:
+            cursor.execute(query, {
+                "email": email
+            })
+            row = cursor.fetchone()
+
+            if row is not None:
+                return True
+            else:
+                return False
+
+    def signup(self, first_name: str, last_name: str, email: str, username: str, password: str):
+        query = """
+        INSERT INTO user
+        (id, first_name, last_name, email, username, password)
+        VALUES
+        (%(id)s, %(first_name)s, %(last_name)s, %(email)s, %(username)s, %(password)s);
+        """
+
+        with self.db.cursor(dictionary=True) as cursor:
+            cursor.execute(query, {
+                "id": str(uuid4()),
+                "first_name": first_name,
+                "last_name": last_name,
+                "email": email,
+                "username": username,
+                "password": password
+            })
