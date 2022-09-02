@@ -1,13 +1,12 @@
 from webapp.users.dao.dao import UserDAO
-from webapp.users.model.user import GetUserInfoRequest
 
 
 class UserService:
     def __init__(self):
         self.dao = UserDAO()
 
-    def template(self, req: GetUserInfoRequest):
-        return self.dao.template(req.user_id)
+    def template(self, user_id: str):
+        return self.dao.template(user_id)
 
     def signup(self,
                first_name: str,

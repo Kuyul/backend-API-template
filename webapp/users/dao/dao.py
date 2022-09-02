@@ -1,36 +1,34 @@
-from typing import Optional
-
 from common_lib.infra.mysql import DB
-from webapp.users.model.user import UserInfo
-from uuid import uuid4
 
 
 class UserDAO:
     def __init__(self):
         self.db = DB()
 
-    def template(self, user_id: str) -> Optional[UserInfo]:
+    def template(self, user_id):
         query = """
-                SELECT USER_ID 
-                , FIRST_NAME
-                , LAST_NAME
-                , PROF_PIC_URL
-                , EMAIL
-                FROM CHAT_USER
+                SELECT id 
+                , first_name
+                , last_name
+                , prof_pic_url
+                , email
+                FROM user
                 WHERE USER_ID = %(user_id)s
                 """
+                
         with self.db.cursor(dictionary=True) as cursor:
             cursor.execute(query, {
                 "user_id": user_id
             })
             row = cursor.fetchone()
-            user = UserInfo(
-                user_id=row['USER_ID'],
-                email=row['EMAIL'],
-                first_name=row['FIRST_NAME'],
-                last_name=row['LAST_NAME'],
-                prof_pic_url=row['PROF_PIC_URL']
-            )
+            
+            user = {
+                "user_id": row['USER_ID'],
+                "email": row['EMAIL'],
+                "first_name": row['FIRST_NAME'],
+                "last_name": row['LAST_NAME'],
+                "prof_pic_url": row['PROF_PIC_URL']
+            }
 
             return user
 

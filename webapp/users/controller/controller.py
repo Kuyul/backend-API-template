@@ -1,9 +1,6 @@
 from flask.views import MethodView
 from flask import request
-from webapp.template import make_output
-
 from webapp.users.service.service import UserService
-from webapp.users.model.user import UserInfo, GetUserInfoRequest
 
 
 class TemplateController(MethodView):
@@ -11,16 +8,15 @@ class TemplateController(MethodView):
         self.service = UserService()
 
     def post(self):
-        validate = GetUserInfoRequest.Schema().load(request.get_json(force=True, silent=True))
-        user_info = self.service.template(validate)
+        input_data = request.get_json()
+        user_id = input_data['user_id']
 
-        resp_schema = UserInfo.Schema()
+        user_info = self.service.template(user_id)
 
         return {
-                "data": {},
+                "data": user_info,
                 "status": "success",
-                "message": "New user was successfully created"
-            }
+                "message": ""
 
 
 class UserSignUpController(MethodView):
