@@ -17,6 +17,7 @@ class TemplateController(MethodView):
                 "data": user_info,
                 "status": "success",
                 "message": ""
+        }
 
 
 class UserSignUpController(MethodView):
