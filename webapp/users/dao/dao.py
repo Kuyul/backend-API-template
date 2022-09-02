@@ -1,4 +1,5 @@
 from common_lib.infra.mysql import DB
+from uuid import uuid4
 
 
 class UserDAO:
@@ -66,3 +67,24 @@ class UserDAO:
                 "username": username,
                 "password": password
             })
+
+    def check_exists(self, email, password):
+        query = f"""
+        SELECT id from user
+        WHERE email = %(email)s
+        AND password = %(password)s;
+        """
+
+        params = {
+                "email": email,
+                "password": password
+            }
+
+        with self.db.cursor(dictionary=True) as cursor:
+            cursor.execute(query, params)
+            row = cursor.fetchone()
+
+            if row is None:
+                return None
+            else:
+                return row['id']

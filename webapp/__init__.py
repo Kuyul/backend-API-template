@@ -5,6 +5,7 @@ from logging.handlers import TimedRotatingFileHandler
 from flask import Flask
 from flask_cors import CORS
 from flask_compress import Compress
+from flask_jwt_extended import JWTManager
 
 import config
 from common_lib.infra.mysql import DB
@@ -23,6 +24,8 @@ def create_app():
 
     CORS(app)
     Compress(app)
+    JWTManager(app)
+
 
     return app
 

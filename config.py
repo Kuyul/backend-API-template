@@ -1,5 +1,4 @@
 import os
-import logging
 from os.path import join, dirname
 
 from dotenv import load_dotenv
@@ -29,3 +28,7 @@ class BaseConfig(object):
     MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', 'db password')
     MYSQL_DB = os.environ.get('MYSQL_DB', 'db database')
     MYSQL_POOL_SIZE = int(os.environ.get('MYSQL_POOL_SIZE', 5))
+
+    # JWT
+    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', '')
+    PROPAGATE_EXCEPTIONS = True
