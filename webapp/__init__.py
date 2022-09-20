@@ -32,8 +32,9 @@ def create_app():
 
 def register_blueprints(app: Flask) -> None:
     from webapp.users.routes import user_api
+    from webapp.post.routes import post_api
 
-    apis = [user_api]
+    apis = [user_api, post_api]
 
     for _api in apis:
         app.register_blueprint(_api.blueprint)

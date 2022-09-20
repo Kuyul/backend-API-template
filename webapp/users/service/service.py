@@ -25,7 +25,7 @@ class UserService:
 
         self.dao.signup(first_name, last_name, email, username, password)
 
-    def check_login(self, email, password):
+    def check_login(self, email: str, password: str):
         user_id = self.dao.check_exists(email, password)
 
         return user_id

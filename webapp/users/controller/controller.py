@@ -22,6 +22,17 @@ class TemplateController(MethodView):
                 "message": ""
         }
 
+    def get(self):
+        user_id = request.args.get('user_id')
+
+        user_info = self.service.template(user_id)
+
+        return {
+            "data": user_info,
+            "status": "success",
+            "message": ""
+        }
+
 
 class UserSignUpController(MethodView):
     def __init__(self):

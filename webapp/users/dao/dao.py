@@ -68,7 +68,7 @@ class UserDAO:
                 "password": password
             })
 
-    def check_exists(self, email, password):
+    def check_exists(self, email: str, password: str):
         query = f"""
         SELECT id from user
         WHERE email = %(email)s
